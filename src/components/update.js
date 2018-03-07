@@ -5,10 +5,16 @@ class Update extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-			title: props.item.title
-        };
+			title: ''
+        }
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            title: props.item.title
+        });
     }
 
     updateItem(item) {
@@ -21,7 +27,7 @@ class Update extends React.Component {
     handleChange(event) {
         console.log(event.target.value);
         this.setState({
-            title: event.target.value
+            title: event.currentTarget.value
         });
     }
 
@@ -29,8 +35,8 @@ class Update extends React.Component {
         return (
             <div className="input-field col s6 updateItem">
                 <i className="material-icons prefix">mode_edit</i>
-                <input type="text" id="editData" value={this.state.title || ''} onChange={(e) => this.handleChange(e)} />
-                <button className="waves-effect waves-light btn" onClick={this.updateItem.bind(this, this.props.item.id)}>UPDATE</button>
+                <input type="text" id="editData" value={this.state.title || ""} onChange={this.handleChange} />
+                <button className="waves-effect waves-light btn" onClick={this.updateItem.bind(this, this.props.item)}>UPDATE</button>
             </div>
         )
     }

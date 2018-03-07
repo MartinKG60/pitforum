@@ -40,7 +40,7 @@ class App extends Component {
 								<List updateItem={this.updateItem} />
 							</div>
 							<div className="col s6">
-								<ListLive />
+								<ListLive updateItem={this.updateItem} />
 							</div>
 						</div>
 					</div>
