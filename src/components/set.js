@@ -7,7 +7,7 @@ class Set extends React.Component {
     constructor(props) {
 		super(props);
 		this.state = {
-			value: '',
+			title: '',
         };
     }
     
@@ -16,11 +16,11 @@ class Set extends React.Component {
         firebaseCon.content.set('text', Date.now().toString(), { title: inputVal })
         .then(() => console.log('Setting'))
         .catch((e) => console.error(e));
-        this.setState({ value: '' });
+        this.setState({ title: '' });
     }
 
     inputOnChange = (e) => {
-        this.setState({ value: e.target.value });
+        this.setState({ title: e.target.value });
     }
 
     render() {
@@ -29,10 +29,10 @@ class Set extends React.Component {
                 <div className="row">
                     <div className="input-field col s6">
                         <i className="material-icons prefix">add</i>
-                        <input placeholder="Insert data.." type="text" id="setData" value={this.state.value} onChange={this.inputOnChange} />
+                        <input placeholder="Insert data.." type="text" id="setData" value={this.state.title} onChange={this.inputOnChange} />
                         <button onClick={this.addItem} className="waves-effect waves-light btn">ADD</button>
                     </div>
-                    <Update itemId={this.props.itemId} />
+                    <Update item={this.props.item} />
                 </div>
             </div>
         )

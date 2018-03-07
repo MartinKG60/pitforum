@@ -11,12 +11,12 @@ class App extends Component {
 
 		// getInitialState
 		this.state = {
-			itemId: ""
+			item: {}
 		}
 	}
 
-	updateItem(itemId) {
-		this.setState({ itemId: itemId });
+	updateItem(item) {
+		this.setState({ item: item });
 	}
 
 	render() {
@@ -34,7 +34,7 @@ class App extends Component {
 					<div className="col s12">
 						<div className="row">
 							<div className="col s12">
-								<Set itemId={this.state.itemId} />
+								<Set item={this.state.item} />
 							</div>
 							<div className="col s6">
 								<List updateItem={this.updateItem} />

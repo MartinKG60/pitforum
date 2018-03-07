@@ -30,8 +30,8 @@ class List extends React.Component {
   		.catch((e) => console.error(e));
 	}
 	
-	updateItem(itemId) {
-		this.props.updateItem(itemId);
+	updateItem(item) {
+		this.props.updateItem(item);
 	}
     
     render() {
@@ -54,7 +54,7 @@ class List extends React.Component {
 							{item.title}
 						</div>
 						<div className="col s1">
-							<a className="btn-floating waves-effect waves-light red" style={aStyle} onClick={this.updateItem.bind(this, item.id)}>
+							<a className="btn-floating waves-effect waves-light red" style={aStyle} onClick={this.updateItem.bind(this, item)}>
 								<i className="tiny material-icons" style={iconStyle}>edit</i>
 							</a>
 						</div>
