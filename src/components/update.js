@@ -2,12 +2,14 @@ import React from 'react';
 import {firebaseCon} from '../connection';
 
 class Update extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-			title: ''
-        }
+			title: ""
+        };
 
+        this.updateItem = this.updateItem.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -17,26 +19,26 @@ class Update extends React.Component {
         });
     }
 
-    updateItem(item) {
+    updateItem(itemId) {
         let inputVal = document.getElementById("editData").value;
-        firebaseCon.content.update('text', item.id, { title: inputVal })
-        .then(() => console.log('Updating the entry succeeded'))
+        firebaseCon.content.update('text', itemId, { title: inputVal })
+        .then(() => {console.log('Updating the entry succeeded')
+            this.setState({ title: "" });
+        })
         .catch((e) => console.error(e));
     }
 
-    handleChange(event) {
-        console.log(event.target.value);
-        this.setState({
-            title: event.currentTarget.value
-        });
+    handleChange(e) {
+        var value = e.target.value;
+        this.setState({ title: value });
     }
 
     render() {
         return (
-            <div className="input-field col s6 updateItem">
+            <div className="input-field col s12">
                 <i className="material-icons prefix">mode_edit</i>
                 <input type="text" id="editData" value={this.state.title || ""} onChange={this.handleChange} />
-                <button className="waves-effect waves-light btn" onClick={this.updateItem.bind(this, this.props.item)}>UPDATE</button>
+                <button className="waves-effect waves-light btn" onClick={this.updateItem.bind(this, this.props.item.id)}>UPDATE</button>
             </div>
         )
     }

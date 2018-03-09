@@ -1,6 +1,5 @@
 import React from 'react';
 import {firebaseCon} from '../connection';
-import Update from './update'
 
 class Set extends React.Component {
 
@@ -26,13 +25,10 @@ class Set extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="row">
-                    <div className="input-field col s6">
-                        <i className="material-icons prefix">add</i>
-                        <input placeholder="Insert data.." type="text" id="setData" value={this.state.title} onChange={this.inputOnChange} />
-                        <button onClick={this.addItem} className="waves-effect waves-light btn">ADD</button>
-                    </div>
-                    <Update item={this.props.item} />
+                <div className="input-field col s12">
+                    <i className="material-icons prefix">add</i>
+                    <input placeholder="Insert data.." type="text" id="setData" value={this.state.title} onChange={this.inputOnChange} />
+                    <button onClick={this.addItem} className="waves-effect waves-light btn">ADD</button>
                 </div>
             </div>
         )

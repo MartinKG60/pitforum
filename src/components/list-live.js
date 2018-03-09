@@ -1,12 +1,16 @@
 import React from 'react';
 import {firebaseCon} from '../connection';
+import { Link } from 'react-router-dom';
+import Set from './Set';
+import Update from './Update'
 
 class ListLive extends React.Component {
 
     constructor(props) {
 		super(props);
 		this.state = {
-			myLiveData: [],
+            myLiveData: [],
+            item: []
         };
         
         this.updateItem = this.updateItem.bind(this);
@@ -35,8 +39,8 @@ class ListLive extends React.Component {
 	}
 	
 	updateItem(item) {
-		this.props.updateItem(item);
-	}
+        this.setState({ item: item });
+    }
     
     render() {
 
@@ -55,7 +59,7 @@ class ListLive extends React.Component {
 				<li className="collection-item" id={item.id} key={item.id}>
 					<div className="row">
                         <div className="col s10">
-                            {item.title}
+                            <Link to={`/item/detail/${item.id}`}>{item.title}</Link>
                         </div>
                         <div className="col s1">
                             <a className="btn-floating waves-effect waves-light red" style={aStyle} onClick={this.updateItem.bind(this, item)}>
@@ -74,8 +78,17 @@ class ListLive extends React.Component {
         
         return (
             <div>
-                <h5>Live data</h5>
+                <h5>List LIVE</h5>
+                <p>This is live data. Try adding or updating an item from the list and watch it live update.</p>
                 <ul className="collection">{itemList}</ul>
+                <div className="row">
+                    <div className="col s6">
+                        <Set />
+                    </div>
+                    <div className="col s6">
+                        <Update item={this.state.item} />
+                    </div>
+                </div>
             </div>
         )
     }
