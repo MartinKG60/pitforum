@@ -19,8 +19,6 @@ class ForumSubCategories extends React.Component {
 			for (let category in categories) {
 				if(categories.hasOwnProperty(category)) {
 					let arrCategory = categories[category];
-					//console.log(arrCategory.categoryRelation);
-					//console.log(mainCategoryId);
 					if(mainCategoryId == arrCategory.categoryRelation) {
 						categoryList.push(categories[category]);
 					}
