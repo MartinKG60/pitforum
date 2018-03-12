@@ -2,8 +2,13 @@ Pitforum.dk
 
 Logo
 
+
 Forum
+HovedKategorier: Rally, Vejsport, Banesport, Karting, MRC, Dragracing
+UnderKategorier: Generalt, Teknik, Nybegynder
+
 
 Annoncer
+
 
 FAQ

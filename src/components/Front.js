@@ -1,9 +1,10 @@
 import React from 'react';
+import ForumMainCategories from './ForumMainCategories';
 
 const Front = () => {
     return (
-        <div style={{ textAlign: 'center' }}>
-            <p>Testing out Flamelink and React.</p>
+        <div>
+            <ForumMainCategories />
         </div>
     );
 };
