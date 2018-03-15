@@ -53,7 +53,7 @@ class ForumThreads extends React.Component {
                     <img src={require('../images/icon-rally200.jpg')} alt="{thread.subject}" className="circle" />
                     <span className="title">
 						{/* <Link to={`/forum/${this.props.match.params.forumcatid}/${this.props.match.params.forumsubcatid}/${thread.subject}`} params={{ threadid: thread.id }}>{thread.subject}</Link> */}
-						<Link to={{ pathname: `/forum/${this.props.match.params.forumcatid}/${this.props.match.params.forumsubcatid}/${thread.subject}`, props: { threadid: thread.id} }}>
+						<Link to={{ pathname: `/forum/${this.props.match.params.forumcatid}/${this.props.match.params.forumsubcatid}/${thread.subject}`, state: { threadid: thread.id} }}>
 							{thread.subject}
 						</Link>
                     </span>

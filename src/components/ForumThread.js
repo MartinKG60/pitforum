@@ -7,13 +7,12 @@ class ForumThread extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            threadid: "",
             replies: []
         }
     }
 
 	componentDidMount(props) {
-        console.log(this.props.isAuthenticated);
+        console.log(this.props);
         console.log(this.state);
 
 		// firebaseCon.content.get('forumThreds', { fields: ['id', 'subject', 'text', 'categoryRelation'], populate: ['categoryRelation'] })
@@ -63,7 +62,7 @@ class ForumThread extends React.Component {
         
         return (
 			<div>
-				<h5>this.props.match.params.forumthreadid</h5>
+				<h5>{this.props.match.params.forumthreadid}</h5>
                 <div>
 
                 </div>

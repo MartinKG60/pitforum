@@ -7,63 +7,52 @@ import ForumSubCategories from './components/ForumSubCategories';
 import ForumThreads from './components/ForumThreads';
 import ForumThread from './components/ForumThread';
 
-class Routes extends React.Component {
-
-    constructor(props) {
-		super(props);
+const Breadcrumbs = ({ match }) => {
+    if(match !== undefined) {
+        return (
+            <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
+                <Link to={match.url || ''}>
+                    {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length)}
+                </Link>
+                <Route path={`${match.url}/:path`} component={Breadcrumbs} />
+            </span>
+        )
+    } else {
+        return true;
     }
+}
 
-    Breadcrumbs = ({ match }) => {
-        if(match !== undefined) {
-            return (
-                <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
-                    <Link to={match.url || ''}>
-                        {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length)}
-                    </Link>
-                    <Route path={`${match.url}/:path`} component={this.Breadcrumbs} />
-                </span>
-            )
-        } else {
-            return true;
-        }
-    }
+const isAuthenticated = () => this.props;
 
-    isAuthenticated = () => this.props;
 
-	render() {
-		return (
-
-            <Router>
-                <div className="container">
-                    <div className="row">
-                        <div className="col s12">
-                            <Header />
-                            <nav className="breadcrumb-wrapper">
-                                <div className="nav-wrapper">
-                                    <div className="col s12">
-                                        <Route path='/:path' component={this.Breadcrumbs} />
-                                    </div>
+const Routes = () => {
+    return (
+        <Router>
+            <div className="container">
+                <div className="row">
+                    <div className="col s12">
+                        <Header />
+                        <nav className="breadcrumb-wrapper">
+                            <div className="nav-wrapper">
+                                <div className="col s12">
+                                    <Route path='/:path' component={Breadcrumbs} />
                                 </div>
-                            </nav>
-                            <Route exact={true} path="/" component={this.Front} />
-                            {/* <Route exact={true} path="/item/list" render={(props) => (
-                                <List updateItem={this.updateItem} />
-                            )}/> */}
-                            <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
-                            <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" component={ForumThreads}></Route>
-                            {/* <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} /> */}
-                            <Route
-                                path="/forum/:forumcatid/:forumsubcatid/:forumthreadid"
-                                render={(props) =>
-                                <ForumThread isAuthenticated={this.isAuthenticated} />
-                            } />
-                        </div>
+                            </div>
+                        </nav>
+                        <Route exact={true} path="/" component={Front} />
+                        <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
+                        <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" component={ForumThreads}></Route>
+                        <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} />
+                        {/* <Route
+                            path="/forum/:forumcatid/:forumsubcatid/:forumthreadid"
+                            render={(props) =>
+                            <ForumThread isAuthenticated={isAuthenticated} />
+                        } /> */}
                     </div>
                 </div>
-            </Router>
-
-        )
-    }
+            </div>
+        </Router>
+    )
 }
 
 export default Routes;
