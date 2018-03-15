@@ -5,12 +5,15 @@
   "dependencies": {
     "firebase": "^4.11.0",
     "flamelink": "^0.14.1",
+    "html-react-parser": "^0.4.2",
     "node-sass-chokidar": "^1.1.0",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
+    "react-breadcrumbs-dynamic": "^1.0.14",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-through": "^1.0.3"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 class Header extends Component {
 	render() {
 		return (
-			<nav>
+			<nav className="header">
                 <div className="nav-wrapper">
                     <Link to='/' className="left brand-logo">
-						Pitforum
+						X
 					</Link>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li>
