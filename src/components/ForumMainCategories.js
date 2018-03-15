@@ -11,7 +11,7 @@ class ForumMainCategories extends React.Component {
 		};
 	}
 
-	componentWillMount() {
+	componentDidMount() {
         firebaseCon.content.get('forumCategories', { fields: ['id', 'name', 'description'] })
         .then((categories) => {
 			let categoryList = [];
@@ -29,7 +29,7 @@ class ForumMainCategories extends React.Component {
 				<li className="category-item collection-item avatar" id={category.id} key={category.id}>
                     <img src={require('../images/icon-rally200.jpg')} alt="{category.name}" className="circle" />
                     <span className="title">
-                        <Link to={`/forum/${category.id}`}>{category.name}</Link>
+                        <Link to={`/forum/${category.name}`}>{category.name}</Link>
                     </span>
                     <p>{category.description}</p>
 				</li>
