@@ -12,7 +12,7 @@ const Breadcrumbs = ({ match }) => {
         return (
             <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
                 <Link to={match.url || ''}>
-                    {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length)}
+                    {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length).split("?")[0]}
                 </Link>
                 <Route path={`${match.url}/:path`} component={Breadcrumbs} />
             </span>
