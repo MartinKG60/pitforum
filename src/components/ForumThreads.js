@@ -102,7 +102,7 @@ class ForumThreads extends React.Component {
 		// }
         return (
 			<div>
-				<h5>{this.props.match.params.forumsubcatid} <ModalComp modalLinkText="Ny tråd" /></h5>
+				<h5>{this.props.match.params.forumsubcatid} <span className="floatRight"><ModalComp modalLinkText="Ny tråd" /></span></h5>
 				{threadList.length ? 
 				<ul className="collection threads">{threadList}</ul> : 
 				<span className="no-threads">Ingen tråde i denne kategori. Vær den første til at <ModalComp modalLinkText="oprette en" />!</span>}
