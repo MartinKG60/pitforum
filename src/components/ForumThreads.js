@@ -2,7 +2,8 @@ import React from 'react';
 import {firebaseCon} from '../connection';
 import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
-import { Modal } from 'react-materialize';
+//import { Modal } from 'react-materialize';
+import ModalComp from './Modal';
 
 class ForumThreads extends React.Component {
 
@@ -85,27 +86,26 @@ class ForumThreads extends React.Component {
             )
 		});
 
-		const OpenModal = (...props) => {
-			console.log(this);
-			return (
-				<Modal
-				fixedFooter
-				trigger={<a>OPEN</a>}
-				actions={<button className="btn waves-effect waves-light btn-flat modal-action modal-close">Fortryd</button>}>
-				<h5>Opret ny tråd i {this.props.match.params.forumcatid} - {this.props.match.params.forumsubcatid}</h5>
-				<input placeholder="Giv din tråd et navn" type="text" id="threadsubject" value={this.state.newThreadSubject} onChange={this.subjectOnChange} />
-				<textarea id="threadtext" value={this.state.newThreadText} onChange={this.textOnChange}></textarea>
-				<button onClick={this.addThread} className="waves-effect waves-light btn">Opret tråd</button>
-				</Modal>
-			)
-		}
-		
+		// const OpenModal = (...props) => {
+		// 	console.log(this);
+		// 	return (
+		// 		<Modal
+		// 		fixedFooter
+		// 		trigger={<a>OPEN</a>}
+		// 		actions={<button className="btn waves-effect waves-light btn-flat modal-action modal-close">Fortryd</button>}>
+		// 		<h5>Opret ny tråd i {this.props.match.params.forumcatid} - {this.props.match.params.forumsubcatid}</h5>
+		// 		<input placeholder="Giv din tråd et navn" type="text" id="threadsubject" value={this.state.newThreadSubject} onChange={this.subjectOnChange} />
+		// 		<textarea id="threadtext" value={this.state.newThreadText} onChange={this.textOnChange}></textarea>
+		// 		<button onClick={this.addThread} className="waves-effect waves-light btn">Opret tråd</button>
+		// 		</Modal>
+		// 	)
+		// }
         return (
 			<div>
-				<h5>{this.props.match.params.forumsubcatid} <OpenModal modalLinkText="Hej" /></h5>
+				<h5>{this.props.match.params.forumsubcatid} <ModalComp modalLinkText="Ny tråd" /></h5>
 				{threadList.length ? 
 				<ul className="collection threads">{threadList}</ul> : 
-				<span className="no-threads">Ingen tråde i denne kategori. Vær den første til at !</span>}
+				<span className="no-threads">Ingen tråde i denne kategori. Vær den første til at <ModalComp modalLinkText="oprette en" />!</span>}
 			</div>
         )
     }
