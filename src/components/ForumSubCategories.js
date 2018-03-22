@@ -51,7 +51,9 @@ class ForumSubCategories extends React.Component {
 				<li className="category-item collection-item avatar" id={category.id} key={category.id}>
 					<img src={require('../images/icon-rally200.jpg')} alt="{category.name}" className="circle" />
 					<span className="title">
-						<Link to={`/forum/${this.state.mainCategoryName}/${category.name}`}>{category.name}</Link>
+						<Link to={{ pathname: `/forum/${this.state.mainCategoryName}/${category.name}`, state: { subcatid: category.id} }}>
+							{category.name}
+						</Link>
 					</span>
 					<p>{category.description}</p>
 				</li>

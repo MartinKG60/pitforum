@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import FacebookLoginButton from './FacebookLogin';
 
 class Header extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: ""
+        }
+    }
+
 	render() {
 		return (
 			<nav className="header">
@@ -12,13 +20,7 @@ class Header extends Component {
 					</Link>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li>
-                            <FacebookLoginButton />
-                        </li>
-                        <li>
-                            <Link to="/item/list">List</Link>
-                        </li>
-                        <li>
-                            <Link to="/item/list-live">List LIVE</Link>
+                            <FacebookLoginButton user={this.props.user} login={this.props.login} />
                         </li>
                     </ul>
                 </div>

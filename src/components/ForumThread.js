@@ -14,7 +14,7 @@ class ForumThread extends React.Component {
     }
 
 	componentDidMount(props) {
-		firebaseCon.content.get('forumThreds', this.props.location.state.threadid, { fields: ['id', 'subject', 'text', 'categoryRelation'], populate: ['categoryRelation'] })
+		firebaseCon.content.get('forumThreads', this.props.location.state.threadid, { fields: ['id', 'subject', 'text', 'categoryRelation'], populate: ['categoryRelation'] })
         .then((thread) => {
 			this.setState({ forumthreadsubject: thread.subject });
 			this.setState({ forumthreadtext: thread.text });
