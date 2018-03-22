@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -7,49 +7,54 @@ import ForumSubCategories from './components/ForumSubCategories';
 import ForumThreads from './components/ForumThreads';
 import ForumThread from './components/ForumThread';
 
-const Breadcrumbs = ({ match }) => {
-    if(match !== undefined) {
-        return (
-            <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
-                <Link to={match.url || ''}>
-                    {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length).split("?")[0]}
-                </Link>
-                <Route path={`${match.url}/:path`} component={Breadcrumbs} />
-            </span>
-        )
-    } else {
-        return true;
-    }
-}
+class Routes extends Component {
 
-const Routes = () => {
-    return (
-        <Router>
-            <div className="container">
-                <div className="row">
-                    <div className="col s12">
-                        <Header />
-                        <nav className="breadcrumb-wrapper">
-                            <div className="nav-wrapper">
-                                <div className="col s12">
-                                    <Route path='/:path' component={Breadcrumbs} />
+	constructor(props) {
+        super(props);
+        this.state = {
+            user: ""
+        }
+    }
+
+    Breadcrumbs = ({ match }) => {
+        if(match !== undefined) {
+            return (
+                <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
+                    <Link to={match.url || ''}>
+                        {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length).split("?")[0]}
+                    </Link>
+                    <Route path={`${match.url}/:path`} component={this.Breadcrumbs} />
+                </span>
+            )
+        } else {
+            return true;
+        }
+    }
+    
+    render() {
+        return (
+            <Router>
+                <div className="container">
+                    <div className="row">
+                        <div className="col s12">
+                            <Header user={this.props.user} login={this.props.login} />
+                            <nav className="breadcrumb-wrapper">
+                                <div className="nav-wrapper">
+                                    <div className="col s12">
+                                        <Route path='/:path' component={this.Breadcrumbs} />
+                                    </div>
                                 </div>
-                            </div>
-                        </nav>
-                        <Route exact={true} path="/" component={Front} />
-                        <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
-                        <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" component={ForumThreads}></Route>
-                        <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} />
-                        {/* <Route
-                            path="/forum/:forumcatid/:forumsubcatid/:forumthreadid"
-                            render={(props) =>
-                            <ForumThread isAuthenticated={isAuthenticated} />
-                        } /> */}
+                            </nav>
+                            <Route exact={true} path="/" component={Front} />
+                            <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
+                            <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" render={(routeProps) => ( <ForumThreads {...routeProps} {...this.props}/> )} />
+                            <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Router>
-    )
+            </Router>
+        )
+    }
 }
 
 export default Routes;

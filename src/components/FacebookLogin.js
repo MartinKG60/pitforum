@@ -1,64 +1,67 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+//import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import {firebaseCon} from '../connection';
 
 class FacebookLoginButton extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            userId: "",
-            userName: "",
-            userExist: true
-        };
+            user: null
+        }
     }
 
-	componentDidMount() {
-        if(this.state.userId !== "") {
-            firebaseCon.content.get('users', { fields: [ 'userid', 'username' ] })
-            .then((users) => {
+    componentDidUpdate() {
+        if(this.props.user) {
+            if(this.props.user.uid !== "") {
+                firebaseCon.content.get('users', { fields: [ 'userid', 'username' ] })
+                .then((users) => {
 
-                // Iterate over users
-                let userList = [];
-                for (let user in users) {
-                    userList.push(users[user]);
-                }
+                    // Iterate over users
+                    let userList = [];
+                    for (let user in users) {
+                        userList.push(users[user]);
+                    }
 
-                // Convert userObject to Array
-                const userArray = userList.map((user) => {
-                    return user.userid
+                    // Convert userObject to Array
+                    const userArray = userList.map((user) => {
+                        return user.userid
+                    })
+
+                    // If user doesn't exist, create it!
+                    if(userArray.includes(this.props.user.uid) === false) {
+                        firebaseCon.content.set('users', Date.now().toString(), { userid: this.props.user.uid, username: this.props.user.displayName })
+                        .then(() => console.log('Setting'))
+                        .catch((e) => console.error(e));
+                    }
+
                 })
-
-                //  Check if user exist in Firebase
-                if(userArray.includes(this.state.userId) === false) {
-                    console.log("User doesn't exist");
-                    this.setState({
-                        userExist: false
-                    });
-                }
-
-                // If user doesn't exist, create it!
-                if(this.state.userExist === false) {
-                    firebaseCon.content.set('users', Date.now().toString(), { userid: this.state.userId, username: this.state.userName })
-                    .then(() => console.log('Setting'))
-                    .catch((e) => console.error(e));
-                }
-
-            })
-            .catch((error) => console.error(error));
+                .catch((error) => console.error(error));
+            }
         }
     }
     
-    responseFacebook = (response) => {
-        this.setState({ 
-            userId: response.id,
-            userName: response.name
-        }, this.componentDidMount);
-    }
+    // responseFacebook = (response) => {
+    //     const userPictureArray = Object.values(this.props.picture)[0];
+    //     this.setState({ 
+    //         userPicture: userPictureArray.url,
+    //         isLoggedIn: true
+    //     }, this.componentDidUpdate);
+    // }
 
     render() {
+        // const isLoggedIn = this.state.isLoggedIn;
+        // const greeting = isLoggedIn ? (
+        //     <div><p>Hej {this.props.user.name}</p> <img src={this.state.userPicture} alt={this.props.user.name} /></div>
+        // ) : (
+        //     <FacebookLogin appId="1554227584702614" autoLoad fields="name,picture" callback={this.responseFacebook} render={renderProps => (<a onClick={renderProps.onClick}>Login with Facebook</a>)} />
+        // );
 		return (
-            <div data-userid={this.state.userId} data-username={this.state.userName} data-userexist={this.state.userExist}>
-                <FacebookLogin appId="1554227584702614" autoLoad callback={this.responseFacebook} render={renderProps => (<a onClick={renderProps.onClick}>Login with Facebook</a>)} />
+            <div id="facebook-login">
+                <p>{this.props.user ? `Hej ${this.props.user.displayName}!` : ""}</p>
+                {this.props.user ? <img src={this.props.user.photoURL} alt={this.props.user.displayName} width="30px" /> : ""}
+                <p>{this.props.user ? "" : <a onClick={this.props.login.bind(this)}>Facebook</a>}</p>
+                {/* {greeting} */}
             </div>
         )
     }
