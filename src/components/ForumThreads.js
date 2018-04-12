@@ -130,7 +130,7 @@ class ForumThreads extends React.Component {
 			//const modalBtn = document.querySelector(".modal-close");
 			//modalBtn.click();
 		} else {
-			console.log("Not OK");
+			console.log("Not OK!");
 		}
 	}
 
