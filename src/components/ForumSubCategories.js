@@ -45,13 +45,12 @@ class ForumSubCategories extends React.Component {
 	}
     
     render() {
-		
         const categoryList = this.state.categories.map((category) => {
 			return (
 				<li className="category-item collection-item avatar" id={category.id} key={category.id}>
 					<img src={require('../images/icon-rally200.jpg')} alt="{category.name}" className="circle" />
 					<span className="title">
-						<Link to={{ pathname: `/forum/${this.state.mainCategoryName}/${category.name}`, state: { subcatid: category.id} }}>
+						<Link to={{ pathname: `/forum/${this.state.mainCategoryName}/${category.name}`, state: { subcategoryid: category.id} }}>
 							{category.name}
 						</Link>
 					</span>

@@ -1,8 +1,18 @@
-.no-threads {
-    div {
-        display: inline-block;
-        a {
-            cursor: pointer;
+.forum {
+
+    .no-threads {
+        div {
+            display: inline-block;
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .thread-item {
+        .thread-info {
+            font-size: 12px;
+            text-align: right;
         }
     }
 }

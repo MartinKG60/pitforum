@@ -46,9 +46,12 @@ class Routes extends Component {
                                 </div>
                             </nav>
                             <Route exact={true} path="/" component={Front} />
-                            <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
-                            <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" render={(routeProps) => ( <ForumThreads {...routeProps} {...this.props}/> )} />
-                            <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} />
+                            <div className="forum">
+                                <Route exact={true} path="/forum/:forumcatid" component={ForumSubCategories} />
+                                <Route exact={true} path="/forum/:forumcatid/:forumsubcatid" render={(routeProps) => ( <ForumThreads {...routeProps} {...this.props} /> )} />
+                                <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" render={(routeProps) => ( <ForumThread {...routeProps} {...this.props} /> )} />
+                                {/* <Route exact={true} path="/forum/:forumcatid/:forumsubcatid/:forumthreadid" component={ForumThread} /> */}
+                            </div>
                         </div>
                     </div>
                 </div>

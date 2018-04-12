@@ -46,19 +46,13 @@ class App extends Component {
 		await firebase.auth().signOut();
 		this.setState({user: null});
 	}
-	
-	// responseFacebook = (response) => {
-	// 	this.setState({ 
-	// 		user: response
-	// 	});
-	// }
 
 	render() {
 		return (
 			<div>
 				{/* <p>{this.state.user ? `Hi, ${this.state.user.displayName}!` : 'Hi!'}</p> */}
 				{/* <button onClick={this.login.bind(this)}>Login with Facebook</button> */}
-				<button onClick={this.logout.bind(this)}>Logout</button>
+				<button className="x" onClick={this.logout.bind(this)}>Logout</button>
 				{/* <FacebookLogin appId="1554227584702614" isDisabled autoLoad fields="id, name, picture" callback={this.responseFacebook} render={renderProps => (<a onClick={renderProps.onClick}>Login with Facebook</a>)} /> */}
 				{/* <UserList /> */}
 				<Routes user={this.state.user} login={this.login} />
