@@ -1,5 +1,5 @@
 import React from 'react';
-import {firebaseCon} from '../connection';
+import { firebaseCon } from '../../connection';
 import { Link } from 'react-router-dom';
 
 class ForumMainCategories extends React.Component {
@@ -27,7 +27,7 @@ class ForumMainCategories extends React.Component {
         let categoryList = this.state.categories.map((category) => {
 			return (
 				<li className="category-item collection-item avatar" id={category.id} key={category.id}>
-                    <img src={require('../images/icon-rally200.jpg')} alt="{category.name}" className="circle" />
+                    <i className="material-icons circle white-text">forum</i>
                     <span className="title">
                         <Link to={`/forum/${category.name}`}>{category.name}</Link>
                     </span>

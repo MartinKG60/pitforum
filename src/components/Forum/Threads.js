@@ -1,8 +1,8 @@
 import React from 'react';
-import {firebaseCon} from '../connection';
+import { firebaseCon } from '../../connection';
 import { Link } from 'react-router-dom';
 import Parser from 'html-react-parser';
-import ModalComp from './Modal';
+import ModalComp from '../Modal';
 import DateFormat from 'dateformat';
 
 // Require Editor JS files.
@@ -56,8 +56,7 @@ class ForumThreads extends React.Component {
 				},
 				{
 					field: 'userRelation',
-					fields: ['id', 'facebookUserid', 'username', 'image'],
-					populate: [ 'image' ]
+					fields: ['id', 'facebookUserid', 'username', 'image']
 				}
 			]
 	 	})
@@ -123,7 +122,7 @@ class ForumThreads extends React.Component {
 		let textVal = this.state.newThreadText;
 
 		if(subjectVal && textVal !== "") {
-			firebaseCon.content.set('forumThreads', Date.now().toString(), { subject: subjectVal, text: textVal, categoryRelation: this.props.location.state.subcategoryid, mainCategory: this.props.match.params.forumcatid, userRelation: this.state.userid })
+			firebaseCon.content.set('forumThreads', Date.now().toString(), { subject: subjectVal, text: textVal, categoryRelation: this.props.location.state.subcategoryid, mainCategory: this.props.match.params.forumcatid, dateCreated: Date.now(), userRelation: this.state.userid })
 			.then(() => console.log('Setting'))
 			.catch((e) => console.error(e));
 			window.location.reload();
@@ -137,13 +136,16 @@ class ForumThreads extends React.Component {
 	render() {
         const threadList = this.state.threads.map((thread) => {
 			const userRelated = thread.userRelation;
-			const user = userRelated[0];
-			if(user.image !== undefined) {
-				console.log(Object.entries(user.image));
+			let userImageUrl = "";
+			let username = "";
+			if(userRelated !== undefined) {
+				userImageUrl = userRelated[0].image;
+				username = userRelated[0].username;
 			}
+
             return (
                 <li className="thread-item collection-item avatar" id={thread.id} key={thread.id}>
-                    <img src={userRelated[0].image} alt={userRelated[0].username} className="circle" />
+                    <img src={userImageUrl} alt={username} title={username} className="circle" />
                     <span className="title">
 						<Link to={{ pathname: `/forum/${this.props.match.params.forumcatid}/${this.props.match.params.forumsubcatid}/${thread.subject}`, state: { threadid: thread.id} }}>
 							{thread.subject}

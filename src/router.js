@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Front from './components/Front';
-import ForumSubCategories from './components/ForumSubCategories';
-import ForumThreads from './components/ForumThreads';
-import ForumThread from './components/ForumThread';
+import ForumSubCategories from './components/Forum/SubCategories';
+import ForumThreads from './components/Forum/Threads';
+import ForumThread from './components/Forum/Thread';
 
 class Routes extends Component {
 
@@ -20,9 +20,11 @@ class Routes extends Component {
         if(match !== undefined) {
             return (
                 <span className={match.isExact ? 'breadcrumb active' : 'breadcrumb'}>
-                    <Link to={match.url || ''}>
+                    {/* <Link to={match.url || ''}> */}
+                    <span>
                         {match.url.substr(match.url.lastIndexOf('/')+1, match.url.length).split("?")[0]}
-                    </Link>
+                    </span>
+                    {/* </Link> */}
                     <Route path={`${match.url}/:path`} component={this.Breadcrumbs} />
                 </span>
             )

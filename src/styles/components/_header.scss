@@ -1,11 +1,17 @@
 nav {
-    background-color: #6ac9fb;
+    background: $main-color;
+    a {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px !important;
+    }
 }
 
 #facebook-login {
     line-height: normal;
-    p {
-        margin: 0;
-        display: inline-block;
+    img {
+        width: 38px;
+        border-radius: 22px;
+        margin: 14px 8px 0 0;
     }
 }

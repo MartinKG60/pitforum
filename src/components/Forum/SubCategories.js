@@ -1,5 +1,5 @@
 import React from 'react';
-import {firebaseCon} from '../connection';
+import { firebaseCon } from '../../connection';
 import { Link } from 'react-router-dom';
 
 class ForumSubCategories extends React.Component {
@@ -48,7 +48,7 @@ class ForumSubCategories extends React.Component {
         const categoryList = this.state.categories.map((category) => {
 			return (
 				<li className="category-item collection-item avatar" id={category.id} key={category.id}>
-					<img src={require('../images/icon-rally200.jpg')} alt="{category.name}" className="circle" />
+					<i className="material-icons circle">folder</i>
 					<span className="title">
 						<Link to={{ pathname: `/forum/${this.state.mainCategoryName}/${category.name}`, state: { subcategoryid: category.id} }}>
 							{category.name}

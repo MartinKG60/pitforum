@@ -6,6 +6,17 @@ body {
 
 a {
 	cursor: pointer;
+	color: $main-color;
+}
+
+input:focus {
+	border-bottom: 1px solid $main-color !important;
+    -webkit-box-shadow: 0 1px 0 0 $main-color !important;
+    box-shadow: 0 1px 0 0 $main-color !important;
+}
+
+.active {
+	color: $main-color !important;
 }
 
 .floatRight {

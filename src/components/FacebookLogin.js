@@ -14,7 +14,7 @@ class FacebookLoginButton extends Component {
     componentDidUpdate() {
         if(this.props.user) {
             if(this.props.user.uid !== "") {
-                firebaseCon.content.get('users', { fields: [ 'userid', 'username' ] })
+                firebaseCon.content.get('users', { fields: [ 'facebookUserid', 'username' ] })
                 .then((users) => {
 
                     // Iterate over users
@@ -25,13 +25,13 @@ class FacebookLoginButton extends Component {
 
                     // Convert userObject to Array
                     const userArray = userList.map((user) => {
-                        return user.userid
+                        return user.facebookUserid
                     })
 
                     // If user doesn't exist, create it!
                     if(userArray.includes(this.props.user.uid) === false) {
-                        firebaseCon.content.set('users', Date.now().toString(), { userid: this.props.user.uid, username: this.props.user.displayName })
-                        .then(() => console.log('Setting'))
+                        firebaseCon.content.set('users', Date.now().toString(), { facebookUserid: this.props.user.uid, username: this.props.user.displayName, image: this.props.user.photoURL })
+                        .then(() => console.log('Creating user..'))
                         .catch((e) => console.error(e));
                     }
 
@@ -58,10 +58,8 @@ class FacebookLoginButton extends Component {
         // );
 		return (
             <div id="facebook-login">
-                <p>{this.props.user ? `Hej ${this.props.user.displayName}!` : ""}</p>
-                {this.props.user ? <img src={this.props.user.photoURL} alt={this.props.user.displayName} width="30px" /> : ""}
+                {this.props.user ? <img src={this.props.user.photoURL} alt={this.props.user.displayName} title={this.props.user.displayName} /> : ""}
                 <p>{this.props.user ? "" : <a onClick={this.props.login.bind(this)}>Facebook</a>}</p>
-                {/* {greeting} */}
             </div>
         )
     }

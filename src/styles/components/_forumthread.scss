@@ -1,0 +1,18 @@
+.forum {
+
+    .no-replies {
+        div {
+            display: inline-block;
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .reply-item {
+        .reply-info {
+            font-size: 12px;
+            text-align: right;
+        }
+    }
+}
